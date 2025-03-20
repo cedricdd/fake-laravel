@@ -37,4 +37,8 @@ class Database
     public function findAll(string $statement, array $params = []): array {
         return $this->execute($statement, $params)->fetchAll();
     }
+
+    public function getColumn(string $statement, array $params = []): mixed {
+        return $this->execute($statement, $params)->fetchColumn();
+    }
 }

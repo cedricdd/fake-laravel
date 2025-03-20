@@ -1,5 +1,10 @@
 <?php
 
+ini_set('session.name', 'note_session');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', '1');
+session_start();
+
 const BASE_PATH = __DIR__ . "/../";
 
 spl_autoload_register(function ($class) {
