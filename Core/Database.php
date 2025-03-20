@@ -13,29 +13,28 @@ class Database
         $this->pdo = new \PDO($dsn, $config["username"], $config["password"], $config["options"]);
     }
 
-    public function execute(string $statement, array $params = []): void {
+    public function execute(string $statement, array $params = []): mixed {
         $query = $this->pdo->prepare($statement);
         $query->execute($params);
+
+        return $query;
     }
 
-    public function fetch(string $statement, array $params = []): mixed {
-        $query = $this->pdo->prepare($statement);
-        $query->execute($params);
-
-        return $query->fetch();
+    public function find(string $statement, array $params = []): mixed {
+        return $this->execute($statement, $params)->fetch();
     }
 
-    public function fetchAll(string $statement, array $params = []): array {
-        $query = $this->pdo->prepare($statement);
-        $query->execute($params);
+    public function findOrFail(string $statement, array $params = []): mixed {
+        $result = $this->execute($statement, $params)->fetch();
 
-        return $query->fetchAll();
+        if(! $result) {
+            abort(404, "The element count not be found!");
+        }
+
+        return $result;
     }
 
-    public function fetchColumn(string $statement, array $params = []): string {
-        $query = $this->pdo->prepare($statement);
-        $query->execute($params);
-
-        return $query->fetchColumn();
+    public function findAll(string $statement, array $params = []): array {
+        return $this->execute($statement, $params)->fetchAll();
     }
 }

@@ -3,7 +3,7 @@
 use Core\App;
 
 $db = App::resolve("Core\Database");
-$notes = $db->fetchAll("SELECT * FROM notes WHERE user_id = :user_id", ["user_id" => 1]);
+$notes = $db->findAll("SELECT * FROM notes WHERE user_id = :user_id", ["user_id" => 1]);
 
 view("notes/index.php", [
     "title" => "All Your Notes",
