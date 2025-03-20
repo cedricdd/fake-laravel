@@ -1,5 +1,7 @@
 <?php
 
+use Core\App;
+
 $errors = [];
 $body = cleanStringInput($_POST["body"] ?? "");
 
@@ -9,9 +11,10 @@ if(Core\Validator::string($body, 1, 1000) == false) {
 
 //All good insert the note
 if(empty($errors)) {
-    $connection->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
+    $db = App::resolve("Core\Database");
+    $db->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
 
-    header("location: /");
+    header("location: /notes");
 }
 
 view("notes/create.php", [

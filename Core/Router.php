@@ -30,7 +30,7 @@ class Router
         $this->addRoute($uri, "PUT", $controller);
     }
 
-    public function route(string $uri, string $method, Database $connection): void {
+    public function route(string $uri, string $method): void {
         foreach($this->routes as $route) {
             if($route["uri"] == $uri && $route["method"] == $method) {
                 require BASE_PATH . "/controllers/" . $route["controller"];
