@@ -2,23 +2,16 @@
 
 use Core\App;
 use Core\Validator;
+use Validators\AuthForm;
 
 $email = cleanStringInput($_POST["email"] ?? "");
 $password = cleanStringInput($_POST["password"] ?? "");
-$errors = [];
+$form = new AuthForm();
 
-if(! Validator::email($email)) {
-    $errors["email"] = "Please enter a valid email address";
-}
-
-if(! Validator::string($password, 7, 255)) {
-    $errors["password"] = "Please enter a valid password [7-255] characters";
-}
-
-if(!empty($errors)) {
+if(! $form->validate($email, $password)) {
     view("registration/create.php", [
         "title" => "Create An Account",
-        "errors" => $errors,
+        "errors" => $form->errors(),
     ]);
 
     exit();

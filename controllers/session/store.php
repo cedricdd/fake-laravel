@@ -1,24 +1,16 @@
 <?php
 
 use Core\App;
-use Core\Validator;
+use Validators\LoginForm;
 
 $email = cleanStringInput($_POST["email"] ?? "");
 $password = cleanStringInput($_POST["password"] ?? "");
-$errors = [];
+$form = new LoginForm();
 
-if(! Validator::email($email)) {
-    $errors["email"] = "Please enter a valid email address.";
-}
-
-if(! Validator::string($password)) {
-    $errors["password"] = "Please enter a valid password.";
-}
-
-if(!empty($errors)) {
+if(! $form->validate($email, $password)) {
     view("session/create.php", [
         "title" => "Log Into The Note App",
-        "errors" => $errors,
+        "errors" => $form->errors(),
     ]);
 
     exit();
@@ -40,12 +32,10 @@ if($user != false && password_verify($password, $user["password"])) {
     exit();
 }
 
-$errors["password"] = "No matching account found for that email and password.";
-
 if(!empty($errors)) {
     view("session/create.php", [
         "title" => "Log Into The Note App",
-        "errors" => $errors,
+        "errors" => ["password" => "No matching account found for that email and password."],
     ]);
 
     exit();

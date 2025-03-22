@@ -1,23 +1,21 @@
 <?php
 
 use Core\App;
+use Validators\NoteForm;
 
-$errors = [];
 $body = cleanStringInput($_POST["body"] ?? "");
+$form = new NoteForm();
 
-if(Core\Validator::string($body, 1, 1000) == false) {
-    $errors['body'] = "A body of no more than 1.000 characters is required! (Currently " . strlen($body) . " characters)";
-} 
+if(! $form->validate($body)) {
+    view("notes/create.php", [
+        "title" => "Create A New Note",
+        "errors" => $form->errors(),
+    ]);
 
-//All good insert the note
-if(empty($errors)) {
-    $db = App::resolve("Core\Database");
-    $db->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
-
-    header("location: /notes");
+    exit();
 }
 
-view("notes/create.php", [
-    "title" => "Create A New Note",
-    "errors" => $errors,
-]);
+$db = App::resolve("Core\Database");
+$db->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
+
+header("location: /notes");
