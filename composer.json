@@ -1,0 +1,16 @@
+{
+    "name": "cedric/fake-laravel",
+    "authors": [
+        {
+            "name": "Cédric Den Drijver",
+            "email": "c-d-d@hotmail.fr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Validator\\": "Validator/"
+        }
+    }
+}

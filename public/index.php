@@ -2,9 +2,7 @@
 
 const BASE_PATH = __DIR__ . "/../";
 
-spl_autoload_register(function ($class) {
-    require_once BASE_PATH . str_replace("\\", "/", $class) . ".php";
-});
+require BASE_PATH . "/vendor/autoload.php";
 
 Core\Session::start();
 
