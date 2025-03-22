@@ -30,7 +30,7 @@ $user = $db->find("SELECT id FROM users WHERE email = :email", ["email" => $emai
 
 
 if($user != false) {
-    echo "Need to redirect to login page";
+    header("location /login");
     exit();
 }
 

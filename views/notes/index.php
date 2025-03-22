@@ -1,4 +1,5 @@
 <?php require(BASE_PATH . '/views/partials/header.php') ?>
+<?php require(BASE_PATH . '/views/partials/nav.php') ?>
 
     <h1 class="text-center py-4">Your Notes</h1>
     <?php
@@ -10,7 +11,8 @@
         }
     ?>
 
-<div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4 gap-2">
+        <a class="btn btn-success" href="/">Back To Index</a>
         <a class="btn btn-primary" href="/notes/create">Create A Note</a>
     </div>
 

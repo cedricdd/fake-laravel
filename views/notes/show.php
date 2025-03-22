@@ -1,4 +1,5 @@
 <?php require(BASE_PATH . '/views/partials/header.php') ?>
+<?php require(BASE_PATH . '/views/partials/nav.php') ?>
 
     <h1 class="text-center pt-4">Your Note</h1>
     <div>
