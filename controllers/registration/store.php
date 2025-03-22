@@ -22,10 +22,7 @@ $db = App::resolve("Core\Database");
 $user = $db->find("SELECT id FROM users WHERE email = :email", ["email" => $email]);
 
 
-if($user != false) {
-    header("location /login");
-    exit();
-}
+if($user != false) redirect("/login");
 
 $db->execute("INSERT INTO users(email, password) VALUES(:email, :password)", ["email" => $email, "password" => password_hash($password, PASSWORD_DEFAULT)]);
 
@@ -34,5 +31,4 @@ $_SESSION["user"] = [
     "email" => $email,
 ];
 
-header("location: /");
-exit();
+redirect("/");

@@ -26,5 +26,4 @@ if(! $form->validate($body)) {
 
 $db->execute("UPDATE notes SET body = :body WHERE id = :note_id", ["note_id" => $noteID, "body" => $body]);
 
-header("location: /notes/show?id=" . $noteID);
-
+redirect("/notes/show?id=" . $noteID);

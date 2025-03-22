@@ -12,4 +12,4 @@ if($note["user_id"] != 1) abort(403, "You are not allowed to remove this note.")
 
 $db->execute("DELETE FROM notes WHERE id = :note_id", ["note_id" => $noteID]);
 
-header("location: /notes");
+redirect("/notes");

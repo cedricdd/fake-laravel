@@ -19,3 +19,8 @@ function cleanIntegerInput(string $input): int {
 function cleanStringInput(string $input): string {
     return trim(htmlspecialchars($input));
 }
+
+function redirect(string $path) {
+    header("location: " . $path);
+    exit();
+}

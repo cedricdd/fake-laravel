@@ -18,4 +18,4 @@ if(! $form->validate($body)) {
 $db = App::resolve("Core\Database");
 $db->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
 
-header("location: /notes");
+redirect("/notes");

@@ -28,8 +28,7 @@ if($user != false && password_verify($password, $user["password"])) {
         "email" => $email,
     ];
 
-    header("location: /");
-    exit();
+    redirect("/");
 }
 
 if(!empty($errors)) {
