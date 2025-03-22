@@ -4,10 +4,8 @@ namespace Validators;
 
 use Core\Validator;
 
-class LoginForm
+class LoginForm extends Form
 {
-    protected array $errors = [];
-
     public function validate(string $email, string $password): bool {
         if(! Validator::email($email)) {
             $this->errors["email"] = "Please enter a valid email address.";
@@ -18,9 +16,5 @@ class LoginForm
         }
 
         return empty($this->errors);
-    }
-
-    public function errors(): array {
-        return $this->errors;
     }
 }
