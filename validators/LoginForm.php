@@ -6,15 +6,15 @@ use Core\Validator;
 
 class LoginForm extends Form
 {
-    public function validate(string $email, string $password): bool {
-        if(! Validator::email($email)) {
+    public function validate(array $attributes): static {
+        if(! Validator::email($attributes["email"])) {
             $this->errors["email"] = "Please enter a valid email address.";
         }
         
-        if(! Validator::string($password)) {
+        if(! Validator::string($attributes["password"])) {
             $this->errors["password"] = "Please enter a valid password.";
         }
 
-        return empty($this->errors);
+        return parent::validate($attributes);
     }
 }

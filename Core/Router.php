@@ -2,14 +2,13 @@
 
 namespace Core;
 
-use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
 
 class Router 
 {
     protected array $routes = [];
 
-    protected function addRoute(string $uri, string $method, string $controller): Router  {     
+    protected function addRoute(string $uri, string $method, string $controller): static  {     
         $this->routes[] = [
             'uri' => $uri,
             'method' => $method,
@@ -20,23 +19,23 @@ class Router
         return $this;
     }
 
-    public function get(string $uri, string $controller): Router {
+    public function get(string $uri, string $controller): static {
         return $this->addRoute($uri, "GET", $controller);
     }
 
-    public function post(string $uri, string $controller): Router {
+    public function post(string $uri, string $controller): static {
         return $this->addRoute($uri, "POST", $controller);
     }
 
-    public function delete(string $uri, string $controller): Router {
+    public function delete(string $uri, string $controller): static {
         return $this->addRoute($uri, "DELETE", $controller);
     }
 
-    public function put(string $uri, string $controller): Router {
+    public function put(string $uri, string $controller): static {
         return $this->addRoute($uri, "PUT", $controller);
     }
 
-    public function only(string $key): Router {
+    public function only(string $key): static {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
 
         return $this;

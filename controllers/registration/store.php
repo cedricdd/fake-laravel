@@ -6,16 +6,8 @@ use Validators\AuthForm;
 
 $email = cleanStringInput($_POST["email"] ?? "");
 $password = cleanStringInput($_POST["password"] ?? "");
-$form = new AuthForm();
 
-if(! $form->validate($email, $password)) {
-    view("registration/create.php", [
-        "title" => "Create An Account",
-        "errors" => $form->errors(),
-    ]);
-
-    exit();
-}
+new AuthForm()->validate(compact("email", "password"));
 
 $db = App::resolve("Core\Database");
 

@@ -5,7 +5,7 @@
     <form method="POST" accept-charset="UTF-8">
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email" value="<?= $_POST["email"] ?? "" ?>">
+            <input type="email" class="form-control" name="email" value="<?= $old["email"] ?? "" ?>">
             <?php if(isset($errors["email"])) echo "<div class='text-danger mt-2'>" . $errors["email"] . "</div>" ?>
         </div>
         <div class="mb-3">

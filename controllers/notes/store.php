@@ -4,18 +4,13 @@ use Core\App;
 use Validators\NoteForm;
 
 $body = cleanStringInput($_POST["body"] ?? "");
-$form = new NoteForm();
 
-if(! $form->validate($body)) {
-    view("notes/create.php", [
-        "title" => "Create A New Note",
-        "errors" => $form->errors(),
-    ]);
-
-    exit();
-}
+new NoteForm()->validate(compact("body"));
 
 $db = App::resolve("Core\Database");
-$db->execute("INSERT INTO notes(body, user_id) VALUES(:body, 1);", ["body" => $body]);
+$db->execute("INSERT INTO notes(body, user_id) VALUES(:body, :user_id);", [
+    "body" => $body,
+    "user_id" => $_SESSION["user"]["id"],
+]);
 
 redirect("/notes");

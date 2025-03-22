@@ -11,7 +11,7 @@ class Middleware
         "guest" => Guest::class,
     ];
 
-    public function resolve(string|null $key) {
+    public function resolve(string|null $key): void {
         if(!$key) return;
 
         if(!isset(static::MAP[$key])) {
