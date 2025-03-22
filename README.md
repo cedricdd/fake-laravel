@@ -1,3 +1,4 @@
+```
 CREATE DATABASE IF NOT EXISTS `notes`;
 USE `notes`;
 
@@ -17,3 +18,4 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Index 2` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
